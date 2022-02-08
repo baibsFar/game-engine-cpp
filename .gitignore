@@ -1,4 +1,3 @@
 bin/
-include/
 .vscode
 SDL2.framework
