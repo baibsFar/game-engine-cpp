@@ -1,5 +1,7 @@
 #include <iostream>
 #include <Engine.h>
+#include <SDL.h>
+#include <tools.h>
 
 using namespace std;
 

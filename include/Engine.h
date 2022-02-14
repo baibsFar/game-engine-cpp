@@ -1,14 +1,13 @@
-#include <SDL.h>
-#include <Entity.h>
-
 #ifndef __ENGINE_H__
 #define __ENGINE_H__
+
+#include <SDL.h>
 
 namespace GameEngine {
     class Engine {
         private:
-            SDL_Window* gameWindow;
-            SDL_Renderer* gameRenderer;
+            SDL_Window* window;
+            SDL_Renderer* renderer;
             double fps;
             double tick;
             double deltaTime;
@@ -20,8 +19,6 @@ namespace GameEngine {
             void launch();
             void update();
             void clean();
-            void drawEntity(GameEngine::Entity*);
-            void moves(SDL_Event);
             double getFPS();
             double getTick();
             double getDeltaTime();
