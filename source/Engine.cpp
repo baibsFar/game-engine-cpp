@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <Engine.h>
-#include <Square.h>
+#include <Polygon.h>
 
 #define CENTERPOS SDL_WINDOWPOS_CENTERED
 #define W 800
@@ -35,8 +35,6 @@ void GameEngine::Engine::loop() {
     bool quit = false;
     int currentTime = 0, pastTime = SDL_GetTicks();
     int past = 0;
-
-    GameObject::Square* carre = new GameObject::Square(10.0f, 10.0f, 50.0f);
     
     while (!quit) {
         SDL_Event event;
@@ -52,18 +50,6 @@ void GameEngine::Engine::loop() {
         system("clear");
         
         if (event.type == SDL_QUIT) quit = true;
-        if (event.type == SDL_KEYDOWN) {
-            if (event.key.keysym.sym == SDLK_RIGHT) carre->translateX(SPEED * this->deltaTime);
-            if (event.key.keysym.sym == SDLK_LEFT) carre->translateX(-SPEED * this->deltaTime);
-            if (event.key.keysym.sym == SDLK_DOWN) carre->translateY(SPEED * this->deltaTime);
-            if (event.key.keysym.sym == SDLK_UP) carre->translateY(-SPEED * this->deltaTime);
-            if (event.key.keysym.sym == SDLK_r) carre->rotate(THETA * this->deltaTime * ROTATION_SPEED);
-            if (event.key.keysym.sym == SDLK_d) carre->scale(0.98f, 0.98f);
-            if (event.key.keysym.sym == SDLK_u) carre->scale(1.02f, 1.02f);
-            if (event.key.keysym.sym == SDLK_x) carre->scaleX(1.02f);
-            if (event.key.keysym.sym == SDLK_y) carre->scaleY(1.02f);
-        }
-        carre->draw(this->renderer);
         this->update();
     }
 }
