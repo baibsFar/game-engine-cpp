@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <Engine.h>
-#include <Polygon.h>
+#include <Square.h>
 
 #define CENTERPOS SDL_WINDOWPOS_CENTERED
 #define W 800
@@ -35,6 +35,8 @@ void GameEngine::Engine::loop() {
     bool quit = false;
     int currentTime = 0, pastTime = SDL_GetTicks();
     int past = 0;
+
+    GameObject::Square* square = new GameObject::Square();
     
     while (!quit) {
         SDL_Event event;
@@ -47,9 +49,17 @@ void GameEngine::Engine::loop() {
             past = SDL_GetTicks();
         } else SDL_Delay(this->tick / this->fps);
 
-        system("clear");
-        
+        // Quit event handler and update the quit variable
         if (event.type == SDL_QUIT) quit = true;
+        if (event.type == SDL_KEYDOWN) {
+            if (event.key.keysym.sym == SDLK_LEFT) square->translateX(-SPEED * this->deltaTime);
+            if (event.key.keysym.sym == SDLK_RIGHT) square->translateX(SPEED * this->deltaTime);
+            if (event.key.keysym.sym == SDLK_UP) square->translateY(-SPEED * this->deltaTime);
+            if (event.key.keysym.sym == SDLK_DOWN) square->translateY(SPEED * this->deltaTime);
+            if (event.key.keysym.sym == SDLK_r) square->rotate(ROTATION_SPEED * THETA * this->deltaTime);
+            if (event.key.keysym.sym == SDLK_s) square->scale(1.02f);
+        }
+        square->draw(this->renderer);
         this->update();
     }
 }
