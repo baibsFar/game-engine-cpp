@@ -1,3 +1,4 @@
 bin/
 .vscode
 SDL2.framework
+.DS_STORE
